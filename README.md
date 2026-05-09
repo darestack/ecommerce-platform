@@ -19,7 +19,7 @@ Push to main
         ├── Build API image  → push to GHCR (ghcr.io/.../api:latest + :sha)
         └── Build Webapp image → push to GHCR (ghcr.io/.../webapp:latest + :sha)
   │
-  └── Deploy workflow (deploy.yml): pulls images and runs Docker Compose on EC2
+  └── Manual deploy workflow (deploy.yml): pulls images and runs Docker Compose on EC2
         Requires EC2 secrets and fresh deployment evidence before promotion
 ```
 
@@ -29,7 +29,7 @@ Push to main
 |---|---|---|
 | `.github/workflows/ci.yml` | Every push + PR | `npm ci` → `npm test` → `npm run build` for both api and webapp |
 | `.github/workflows/docker-publish.yml` | Push to `main` | Multi-arch Docker build via Buildx, push to GHCR with `latest` and `sha` tags |
-| `.github/workflows/deploy.yml` | Successful CI workflow | Pulls GHCR images and runs Docker Compose on EC2 when secrets are configured |
+| `.github/workflows/deploy.yml` | Manual dispatch | Pulls GHCR images and runs Docker Compose on EC2 when secrets are configured |
 
 ## Evidence
 
